@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructoraUdc", "ConstructoraUdc\ConstructoraUdc.csproj", "{F23029D6-83C4-4682-91D3-535BB9EE603A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.1 View", "1.1 View", "{368AC08A-C399-43E7-AA42-3FB4D8DDF7AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Controller", "2. Controller", "{68C296D3-F95D-4297-B313-E48050F8024E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Model", "3. Model", "{A9A7F67C-C419-4F88-9C01-3CD3F36FF689}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructoraUdcModel", "ConstructoraUdcModel\ConstructoraUdcModel.csproj", "{CFEE4CB0-4BA1-4F06-9691-AAEFCADD2DD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructoraUdcController", "ConstructoraUdcController\ConstructoraUdcController.csproj", "{4631CABC-2A34-4E1A-95F1-293851EF85BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.2 Web Service", "1.2 Web Service", "{3965003E-2016-405A-827E-130274A5E742}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F23029D6-83C4-4682-91D3-535BB9EE603A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F23029D6-83C4-4682-91D3-535BB9EE603A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F23029D6-83C4-4682-91D3-535BB9EE603A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F23029D6-83C4-4682-91D3-535BB9EE603A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFEE4CB0-4BA1-4F06-9691-AAEFCADD2DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFEE4CB0-4BA1-4F06-9691-AAEFCADD2DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFEE4CB0-4BA1-4F06-9691-AAEFCADD2DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFEE4CB0-4BA1-4F06-9691-AAEFCADD2DD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4631CABC-2A34-4E1A-95F1-293851EF85BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4631CABC-2A34-4E1A-95F1-293851EF85BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4631CABC-2A34-4E1A-95F1-293851EF85BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4631CABC-2A34-4E1A-95F1-293851EF85BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F23029D6-83C4-4682-91D3-535BB9EE603A} = {368AC08A-C399-43E7-AA42-3FB4D8DDF7AE}
+		{CFEE4CB0-4BA1-4F06-9691-AAEFCADD2DD2} = {A9A7F67C-C419-4F88-9C01-3CD3F36FF689}
+		{4631CABC-2A34-4E1A-95F1-293851EF85BA} = {68C296D3-F95D-4297-B313-E48050F8024E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B6CD6EE-2CED-43DE-8C00-CA31C6AE90A2}
+	EndGlobalSection
+EndGlobal

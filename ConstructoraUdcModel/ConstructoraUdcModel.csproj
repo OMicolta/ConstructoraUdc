@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CFEE4CB0-4BA1-4F06-9691-AAEFCADD2DD2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConstructoraUdcModel</RootNamespace>
+    <AssemblyName>ConstructoraUdcModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DbModel\RoleDbModel.cs" />
+    <Compile Include="Implementation\RoleImplModel.cs" />
+    <Compile Include="Mappers\GeneralMapper.cs" />
+    <Compile Include="Model\ConstructoraUdcDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConstructoraUdcDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ConstructoraUdcDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConstructoraUdcDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ConstructoraUdcDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConstructoraUdcDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PMT_City.cs">
+      <DependentUpon>ConstructoraUdcDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PMT_Country.cs">
+      <DependentUpon>ConstructoraUdcDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SEC_Role.cs">
+      <DependentUpon>ConstructoraUdcDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SEC_Session.cs">
+      <DependentUpon>ConstructoraUdcDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SEC_User.cs">
+      <DependentUpon>ConstructoraUdcDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SEC_User_role.cs">
+      <DependentUpon>ConstructoraUdcDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Model\ConstructoraUdcDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ConstructoraUdcDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Model\ConstructoraUdcDataModel.edmx.diagram">
+      <DependentUpon>ConstructoraUdcDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\ConstructoraUdcDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConstructoraUdcDataModel.Context.cs</LastGenOutput>
+      <DependentUpon>ConstructoraUdcDataModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\ConstructoraUdcDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ConstructoraUdcDataModel.edmx</DependentUpon>
+      <LastGenOutput>ConstructoraUdcDataModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

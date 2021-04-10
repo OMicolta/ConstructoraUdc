@@ -1,0 +1,429 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ConstructoraUdcDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PMT_City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="country_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PMT_Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SEC_Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="removed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SEC_Session">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="login_date" Type="datetime" Nullable="false" />
+          <Property Name="ip_address" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="token" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="token_status" Type="bit" Nullable="false" />
+          <Property Name="logout_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SEC_User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="document" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="password_user" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="17" Nullable="false" />
+          <Property Name="city_id" Type="int" Nullable="false" />
+          <Property Name="removed" Type="bit" Nullable="false" />
+          <Property Name="removed_date" Type="datetime" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="ipdate_date" Type="datetime" />
+          <Property Name="removed_user_id" Type="int" />
+          <Property Name="create_user_id" Type="int" />
+          <Property Name="update_user_id" Type="int" />
+        </EntityType>
+        <EntityType Name="SEC_User_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_city_id">
+          <End Role="PMT_City" Type="Self.PMT_City" Multiplicity="1" />
+          <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMT_City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SEC_User">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_country_id">
+          <End Role="PMT_Country" Type="Self.PMT_Country" Multiplicity="1" />
+          <End Role="PMT_City" Type="Self.PMT_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMT_Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PMT_City">
+              <PropertyRef Name="country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_role_id">
+          <End Role="SEC_Role" Type="Self.SEC_Role" Multiplicity="1" />
+          <End Role="SEC_User_role" Type="Self.SEC_User_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SEC_User_role">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id">
+          <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="1" />
+          <End Role="SEC_User_role" Type="Self.SEC_User_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SEC_User_role">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id_session">
+          <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="1" />
+          <End Role="SEC_Session" Type="Self.SEC_Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SEC_Session">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ConstructoraUdcDBModelStoreContainer">
+          <EntitySet Name="PMT_City" EntityType="Self.PMT_City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PMT_Country" EntityType="Self.PMT_Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SEC_Role" EntityType="Self.SEC_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SEC_Session" EntityType="Self.SEC_Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SEC_User" EntityType="Self.SEC_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SEC_User_role" EntityType="Self.SEC_User_role" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_city_id" Association="Self.fk_city_id">
+            <End Role="PMT_City" EntitySet="PMT_City" />
+            <End Role="SEC_User" EntitySet="SEC_User" />
+          </AssociationSet>
+          <AssociationSet Name="fk_country_id" Association="Self.fk_country_id">
+            <End Role="PMT_Country" EntitySet="PMT_Country" />
+            <End Role="PMT_City" EntitySet="PMT_City" />
+          </AssociationSet>
+          <AssociationSet Name="fk_role_id" Association="Self.fk_role_id">
+            <End Role="SEC_Role" EntitySet="SEC_Role" />
+            <End Role="SEC_User_role" EntitySet="SEC_User_role" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id" Association="Self.fk_user_id">
+            <End Role="SEC_User" EntitySet="SEC_User" />
+            <End Role="SEC_User_role" EntitySet="SEC_User_role" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id_session" Association="Self.fk_user_id_session">
+            <End Role="SEC_User" EntitySet="SEC_User" />
+            <End Role="SEC_Session" EntitySet="SEC_Session" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ConstructoraUdcDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PMT_City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="country_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SEC_User" Relationship="Self.fk_city_id" FromRole="PMT_City" ToRole="SEC_User" />
+          <NavigationProperty Name="PMT_Country" Relationship="Self.fk_country_id" FromRole="PMT_City" ToRole="PMT_Country" />
+        </EntityType>
+        <EntityType Name="PMT_Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PMT_City" Relationship="Self.fk_country_id" FromRole="PMT_Country" ToRole="PMT_City" />
+        </EntityType>
+        <EntityType Name="SEC_Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="removed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SEC_User_role" Relationship="Self.fk_role_id" FromRole="SEC_Role" ToRole="SEC_User_role" />
+        </EntityType>
+        <EntityType Name="SEC_Session">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="login_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ip_address" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="token" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="token_status" Type="Boolean" Nullable="false" />
+          <Property Name="logout_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SEC_User" Relationship="Self.fk_user_id_session" FromRole="SEC_Session" ToRole="SEC_User" />
+        </EntityType>
+        <EntityType Name="SEC_User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="document" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password_user" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="17" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city_id" Type="Int32" Nullable="false" />
+          <Property Name="removed" Type="Boolean" Nullable="false" />
+          <Property Name="removed_date" Type="DateTime" Precision="3" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ipdate_date" Type="DateTime" Precision="3" />
+          <Property Name="removed_user_id" Type="Int32" />
+          <Property Name="create_user_id" Type="Int32" />
+          <Property Name="update_user_id" Type="Int32" />
+          <NavigationProperty Name="PMT_City" Relationship="Self.fk_city_id" FromRole="SEC_User" ToRole="PMT_City" />
+          <NavigationProperty Name="SEC_Session" Relationship="Self.fk_user_id_session" FromRole="SEC_User" ToRole="SEC_Session" />
+          <NavigationProperty Name="SEC_User_role" Relationship="Self.fk_user_id" FromRole="SEC_User" ToRole="SEC_User_role" />
+        </EntityType>
+        <EntityType Name="SEC_User_role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SEC_Role" Relationship="Self.fk_role_id" FromRole="SEC_User_role" ToRole="SEC_Role" />
+          <NavigationProperty Name="SEC_User" Relationship="Self.fk_user_id" FromRole="SEC_User_role" ToRole="SEC_User" />
+        </EntityType>
+        <Association Name="fk_city_id">
+          <End Role="PMT_City" Type="Self.PMT_City" Multiplicity="1" />
+          <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMT_City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SEC_User">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_country_id">
+          <End Role="PMT_Country" Type="Self.PMT_Country" Multiplicity="1" />
+          <End Role="PMT_City" Type="Self.PMT_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PMT_Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PMT_City">
+              <PropertyRef Name="country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_role_id">
+          <End Role="SEC_Role" Type="Self.SEC_Role" Multiplicity="1" />
+          <End Role="SEC_User_role" Type="Self.SEC_User_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SEC_User_role">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id_session">
+          <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="1" />
+          <End Role="SEC_Session" Type="Self.SEC_Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SEC_Session">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id">
+          <End Role="SEC_User" Type="Self.SEC_User" Multiplicity="1" />
+          <End Role="SEC_User_role" Type="Self.SEC_User_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEC_User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SEC_User_role">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ConstructoraUdcDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PMT_City" EntityType="Self.PMT_City" />
+          <EntitySet Name="PMT_Country" EntityType="Self.PMT_Country" />
+          <EntitySet Name="SEC_Role" EntityType="Self.SEC_Role" />
+          <EntitySet Name="SEC_Session" EntityType="Self.SEC_Session" />
+          <EntitySet Name="SEC_User" EntityType="Self.SEC_User" />
+          <EntitySet Name="SEC_User_role" EntityType="Self.SEC_User_role" />
+          <AssociationSet Name="fk_city_id" Association="Self.fk_city_id">
+            <End Role="PMT_City" EntitySet="PMT_City" />
+            <End Role="SEC_User" EntitySet="SEC_User" />
+          </AssociationSet>
+          <AssociationSet Name="fk_country_id" Association="Self.fk_country_id">
+            <End Role="PMT_Country" EntitySet="PMT_Country" />
+            <End Role="PMT_City" EntitySet="PMT_City" />
+          </AssociationSet>
+          <AssociationSet Name="fk_role_id" Association="Self.fk_role_id">
+            <End Role="SEC_Role" EntitySet="SEC_Role" />
+            <End Role="SEC_User_role" EntitySet="SEC_User_role" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id_session" Association="Self.fk_user_id_session">
+            <End Role="SEC_User" EntitySet="SEC_User" />
+            <End Role="SEC_Session" EntitySet="SEC_Session" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id" Association="Self.fk_user_id">
+            <End Role="SEC_User" EntitySet="SEC_User" />
+            <End Role="SEC_User_role" EntitySet="SEC_User_role" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ConstructoraUdcDBModelStoreContainer" CdmEntityContainer="ConstructoraUdcDBEntities">
+          <EntitySetMapping Name="PMT_City">
+            <EntityTypeMapping TypeName="ConstructoraUdcDBModel.PMT_City">
+              <MappingFragment StoreEntitySet="PMT_City">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="country_id" ColumnName="country_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PMT_Country">
+            <EntityTypeMapping TypeName="ConstructoraUdcDBModel.PMT_Country">
+              <MappingFragment StoreEntitySet="PMT_Country">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEC_Role">
+            <EntityTypeMapping TypeName="ConstructoraUdcDBModel.SEC_Role">
+              <MappingFragment StoreEntitySet="SEC_Role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="removed" ColumnName="removed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEC_Session">
+            <EntityTypeMapping TypeName="ConstructoraUdcDBModel.SEC_Session">
+              <MappingFragment StoreEntitySet="SEC_Session">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="login_date" ColumnName="login_date" />
+                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="token_status" ColumnName="token_status" />
+                <ScalarProperty Name="logout_date" ColumnName="logout_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEC_User">
+            <EntityTypeMapping TypeName="ConstructoraUdcDBModel.SEC_User">
+              <MappingFragment StoreEntitySet="SEC_User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="document" ColumnName="document" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password_user" ColumnName="password_user" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="removed" ColumnName="removed" />
+                <ScalarProperty Name="removed_date" ColumnName="removed_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="ipdate_date" ColumnName="ipdate_date" />
+                <ScalarProperty Name="removed_user_id" ColumnName="removed_user_id" />
+                <ScalarProperty Name="create_user_id" ColumnName="create_user_id" />
+                <ScalarProperty Name="update_user_id" ColumnName="update_user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEC_User_role">
+            <EntityTypeMapping TypeName="ConstructoraUdcDBModel.SEC_User_role">
+              <MappingFragment StoreEntitySet="SEC_User_role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
