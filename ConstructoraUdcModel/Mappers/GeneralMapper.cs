@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConstructoraUdcModel.Mappers
 {
-    public abstract class GeneralMapper< T1, T2 >
-    {
+    public abstract class GeneralMapper< T1, T2 >    {
+        
         public abstract T1 MapperT2T1( T2 input );
 
         public abstract T2 MapperT1T2(T1 input);
