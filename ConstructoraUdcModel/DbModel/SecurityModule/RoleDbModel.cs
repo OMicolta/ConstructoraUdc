@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConstructoraUdcModel.DbModel
+namespace ConstructoraUdcModel.DbModel.SecurityModule
 {
     public class RoleDbModel
     {
@@ -24,9 +24,18 @@ namespace ConstructoraUdcModel.DbModel
             set { name = value; }
         }
 
-        private int removed;
+        private String description;
 
-        public int Removed
+        public String Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
+
+
+        private bool removed;
+
+        public bool Removed
         {
             get { return removed; }
             set { removed = value; }
