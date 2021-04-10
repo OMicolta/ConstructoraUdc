@@ -48,9 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbModel\RoleDbModel.cs" />
-    <Compile Include="Implementation\RoleImplModel.cs" />
+    <Compile Include="DbModel\SecurityModule\RoleDbModel.cs" />
+    <Compile Include="Implementation\SecurityModule\RoleImplModel.cs" />
     <Compile Include="Mappers\GeneralMapper.cs" />
+    <Compile Include="Mappers\SecurityModule\RoleModelMapper.cs" />
     <Compile Include="Model\ConstructoraUdcDataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

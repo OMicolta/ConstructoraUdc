@@ -22,6 +22,7 @@ namespace ConstructoraUdcModel.Model
         public int id { get; set; }
         public string name { get; set; }
         public bool removed { get; set; }
+        public string description { get; set; }
     
         public virtual ICollection<SEC_User_role> SEC_User_role { get; set; }
     }
