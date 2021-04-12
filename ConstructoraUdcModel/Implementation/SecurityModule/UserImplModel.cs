@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace ConstructoraUdcModel.Implementation.SecurityModule
 {
@@ -128,5 +129,50 @@ namespace ConstructoraUdcModel.Implementation.SecurityModule
                 return listaFinal;
             }
         }
+
+        public UserDbModel Login(UserDbModel dbModel)
+        {
+            using (ConstructoraUdcDBEntities db = new ConstructoraUdcDBEntities())
+            {
+                var login = (from user in db.SEC_User
+                           where user.email.ToUpper().Equals(dbModel.Email.ToUpper()) && user.password_user.Equals(dbModel.PasswordUser)
+                           select user).FirstOrDefault();
+
+                if(login == null)
+                {
+                    return null;
+                }
+
+                var date = dbModel.CurrentDate;
+                SEC_Session session = new SEC_Session()
+                {
+                    user_id = login.id,
+                    login_date = date,
+                    token_status = true,
+                    token = this.GetToken(String.Concat(login.id, date)),
+                    ip_address = this.GetIpAddress()
+                };
+
+                db.SEC_Session.Add(session);
+                db.SaveChanges();
+
+                UserModelMapper mapper = new UserModelMapper();
+                return mapper.MapperT1T2(login);
+            }
+        }
+
+        public string GetToken(string key)
+        {
+            int HashCode = key.GetHashCode();
+            return HashCode.ToString();
+        }
+
+        public string GetIpAddress()
+        {
+            string hostName = Dns.GetHostName(); // Retrive  the Name of HOST
+            Console.WriteLine(hostName);
+            // Get the IP
+            string myIp = Dns.GetHostByName(hostName).AddressList[0].ToString();
+            return myIp;
     }
 }

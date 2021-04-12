@@ -23,7 +23,8 @@ namespace ConstructoraUdcModel.Mappers.SecurityModule
                 Email = input.email,
                 PasswordUser = input.password_user,
                 Phone = input.phone,
-                City = input.city_id
+                City = input.city_id,
+                Token = input.SEC_Session.Where(x => x.token_status).OrderByDescending(d => d.login_date).Select(x => x.token).FirstOrDefault()
                 /*
                 Removed = input.removed,
                 RemovedDate = (DateTime)input.removed_date,
