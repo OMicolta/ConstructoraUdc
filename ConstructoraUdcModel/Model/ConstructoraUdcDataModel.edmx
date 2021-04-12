@@ -58,10 +58,10 @@
           <Property Name="removed" Type="bit" Nullable="false" />
           <Property Name="removed_date" Type="datetime" />
           <Property Name="create_date" Type="datetime" Nullable="false" />
-          <Property Name="ipdate_date" Type="datetime" />
           <Property Name="removed_user_id" Type="int" />
           <Property Name="create_user_id" Type="int" />
           <Property Name="update_user_id" Type="int" />
+          <Property Name="update_date" Type="datetime" />
         </EntityType>
         <EntityType Name="SEC_User_role">
           <Key>
@@ -228,6 +228,7 @@
           <NavigationProperty Name="PMT_City" Relationship="Self.fk_city_id" FromRole="SEC_User" ToRole="PMT_City" />
           <NavigationProperty Name="SEC_Session" Relationship="Self.fk_user_id_session" FromRole="SEC_User" ToRole="SEC_Session" />
           <NavigationProperty Name="SEC_User_role" Relationship="Self.fk_user_id" FromRole="SEC_User" ToRole="SEC_User_role" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="SEC_User_role">
           <Key>
@@ -378,6 +379,7 @@
           <EntitySetMapping Name="SEC_User">
             <EntityTypeMapping TypeName="ConstructoraUdcDBModel.SEC_User">
               <MappingFragment StoreEntitySet="SEC_User">
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="lastName" ColumnName="lastName" />
@@ -389,7 +391,6 @@
                 <ScalarProperty Name="removed" ColumnName="removed" />
                 <ScalarProperty Name="removed_date" ColumnName="removed_date" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="ipdate_date" ColumnName="ipdate_date" />
                 <ScalarProperty Name="removed_user_id" ColumnName="removed_user_id" />
                 <ScalarProperty Name="create_user_id" ColumnName="create_user_id" />
                 <ScalarProperty Name="update_user_id" ColumnName="update_user_id" />

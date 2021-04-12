@@ -35,6 +35,7 @@ namespace ConstructoraUdcModel.Model
         public Nullable<int> removed_user_id { get; set; }
         public Nullable<int> create_user_id { get; set; }
         public Nullable<int> update_user_id { get; set; }
+        public Nullable<System.DateTime> update_date { get; set; }
     
         public virtual PMT_City PMT_City { get; set; }
         public virtual ICollection<SEC_Session> SEC_Session { get; set; }

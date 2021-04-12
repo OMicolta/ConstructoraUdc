@@ -48,9 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbModel\DbModelBase.cs" />
+    <Compile Include="DbModel\SecurityModule\UserDbModel.cs" />
     <Compile Include="DbModel\SecurityModule\RoleDbModel.cs" />
+    <Compile Include="Implementation\SecurityModule\UserImplModel.cs" />
     <Compile Include="Implementation\SecurityModule\RoleImplModel.cs" />
     <Compile Include="Mappers\GeneralMapper.cs" />
+    <Compile Include="Mappers\SecurityModule\UserModelMapper.cs" />
     <Compile Include="Mappers\SecurityModule\RoleModelMapper.cs" />
     <Compile Include="Model\ConstructoraUdcDataModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -115,6 +119,10 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DbModel\CoreModule\" />
+    <Folder Include="Implementation\CoreModule\" />
+    <Folder Include="Mappers\CoreModule\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
