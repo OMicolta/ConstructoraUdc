@@ -10,7 +10,7 @@ using System.Net;
 
 namespace ConstructoraUdcModel.Implementation.SecurityModule
 {
-    public class ImplModel
+    public class UserImplModel
     {
         /// <summary>
         /// Se agrega un nuevo registro a los Users
@@ -130,6 +130,54 @@ namespace ConstructoraUdcModel.Implementation.SecurityModule
             }
         }
 
+        public int ChangePassword(string currentPassword, string newPassword, int userId, out string email)
+        {
+            email = string.Empty;
+            using (ConstructoraUdcDBEntities db = new ConstructoraUdcDBEntities())
+            {
+                try
+                {
+                    var user = db.SEC_User.Where(x => x.id == userId && x.password_user.Equals(currentPassword)).FirstOrDefault();
+                    if (user == null)
+                    {
+                        return 3;
+                    }
+                    user.password_user = newPassword;
+                    db.SaveChanges();
+                    email = user.email;
+                    return 1;
+                }
+                catch
+                {
+                    return 2;
+                }
+            }
+        }
+
+        public int PasswordReset(string email, string newPassword)
+        {
+            email = string.Empty;
+            using (ConstructoraUdcDBEntities db = new ConstructoraUdcDBEntities())
+            {
+                try
+                {
+                    var user = db.SEC_User.Where(x => x.email.Equals(email)).FirstOrDefault();
+                    if (user == null)
+                    {
+                        return 3;
+                    }
+                    user.password_user = newPassword;
+                    db.SaveChanges();
+                    email = user.email;
+                    return 1;
+                }
+                catch
+                {
+                    return 2;
+                }
+            }
+        }
+
         public UserDbModel Login(UserDbModel dbModel)
         {
             using (ConstructoraUdcDBEntities db = new ConstructoraUdcDBEntities())
@@ -174,5 +222,6 @@ namespace ConstructoraUdcModel.Implementation.SecurityModule
             // Get the IP
             string myIp = Dns.GetHostByName(hostName).AddressList[0].ToString();
             return myIp;
+        }
     }
 }
